@@ -268,15 +268,13 @@ human-activity-recognition/
 
 ## 👨‍💻 Author
 
-**Your Name**
-- GitHub: [@your-username](https://github.com/your-username)
-- LinkedIn: [Your Profile](https://linkedin.com/in/your-profile)
-- Email: your.email@example.com
+Michael(Me)
+- LinkedIn: [Your Profile]([https://linkedin.com/in/your-profil](https://www.linkedin.com/in/ivan-komi-25397028a)
 
 ## 🙏 Acknowledgments
 
 - MotionSense Dataset by Mohammad Malekzadeh
-- Supervising Professor: [Professor Name]
+- Supervising Professor: Julien Maitre,PhD
 - Kaggle Community
 
 ## 📄 License

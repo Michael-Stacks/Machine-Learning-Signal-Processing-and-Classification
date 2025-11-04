@@ -269,7 +269,7 @@ human-activity-recognition/
 ## 👨‍💻 Author
 
 Michael (Me)
-- LinkedIn: [Your Profile]([https://linkedin.com/in/your-profil](https://www.linkedin.com/in/ivan-komi-25397028a))
+- LinkedIn: [Profile]([https://linkedin.com/in/your-profil](https://www.linkedin.com/in/ivan-komi-25397028a).)
 
 ## 🙏 Acknowledgments
 

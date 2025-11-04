@@ -1,87 +1,87 @@
-# 🏃 Classification d'Activités Humaines avec Signaux Inertiels
+# 🏃 Human Activity Recognition with Inertial Signals
 
-> Projet de recherche supervisée sur la classification automatique d'activités humaines à partir de données d'accéléromètre et gyroscope du dataset **MotionSense**.
+> Supervised research project on automatic human activity classification from accelerometer and gyroscope data using the **MotionSense** dataset.
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)](https://www.tensorflow.org/)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.x-green.svg)](https://scikit-learn.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 📋 Table des Matières
+## 📋 Table of Contents
 
-- [À Propos](#-à-propos)
-- [Caractéristiques](#-caractéristiques)
+- [About](#-about)
+- [Features](#-features)
 - [Dataset](#-dataset)
-- [Méthodologie](#-méthodologie)
-- [Résultats](#-résultats)
+- [Methodology](#-methodology)
+- [Results](#-results)
 - [Installation](#-installation)
-- [Utilisation](#-utilisation)
-- [Structure du Projet](#-structure-du-projet)
+- [Usage](#-usage)
+- [Project Structure](#-project-structure)
 - [Technologies](#-technologies)
-- [Auteur](#-auteur)
-- [Licence](#-licence)
+- [Author](#-author)
+- [License](#-license)
 
-## 🎯 À Propos
+## 🎯 About
 
-Ce projet démontre la **supériorité des approches d'apprentissage profond** pour la classification d'activités humaines à partir de signaux temporels inertiels. Nous comparons deux approches complémentaires :
+This project demonstrates the **superiority of deep learning approaches** for human activity classification from temporal inertial signals. We compare two complementary approaches:
 
-1. **Random Forest** avec extraction manuelle de caractéristiques statistiques
-2. **CNN 1D** avec apprentissage automatique de features temporelles
+1. **Random Forest** with manual statistical feature extraction
+2. **1D CNN** with automatic temporal feature learning
 
-Le projet inclut également une **étude approfondie d'optimisation** : impact de l'overlap, sélection de features, et optimisation d'hyperparamètres.
+The project also includes a **comprehensive optimization study**: overlap impact, feature selection, and hyperparameter tuning.
 
-### 🎓 Contexte Académique
+### 🎓 Academic Context
 
-Projet réalisé dans le cadre d'une activité de recherche supervisée, utilisant le dataset **MotionSense** disponible sur Kaggle. L'objectif est de classifier 6 activités humaines distinctes à partir de données de capteurs inertiels provenant de smartphones.
+Project conducted as part of a supervised research activity, using the **MotionSense** dataset available on Kaggle. The objective is to classify 6 distinct human activities from smartphone inertial sensor data.
 
-## ✨ Caractéristiques
+## ✨ Features
 
-- ✅ **Classification de 6 activités** : marche, jogging, montée/descente d'escaliers, assis, debout
-- ✅ **Split par utilisateur** pour éviter la fuite de données
-- ✅ **Validation LOSO** (Leave-One-Subject-Out) pour évaluation robuste
-- ✅ **240+ features avancées** : temporelles, fréquentielles (FFT), entropie, autocorrélation
-- ✅ **Optimisation complète** : overlap, sélection de features, hyperparamètres
-- ✅ **Architecture CNN avec régularisation** pour prévenir l'overfitting
-- ✅ **Visualisations détaillées** : matrices de confusion, courbes d'apprentissage, distributions
+- ✅ **6 activity classification**: walking, jogging, upstairs/downstairs, sitting, standing
+- ✅ **User-based split** to prevent data leakage
+- ✅ **LOSO validation** (Leave-One-Subject-Out) for robust evaluation
+- ✅ **240+ advanced features**: temporal, frequency (FFT), entropy, autocorrelation
+- ✅ **Complete optimization**: overlap, feature selection, hyperparameters
+- ✅ **CNN architecture with regularization** to prevent overfitting
+- ✅ **Detailed visualizations**: confusion matrices, learning curves, distributions
 
 ## 📊 Dataset
 
 **MotionSense Dataset**
-- 📱 Source : Données d'accéléromètre et gyroscope de smartphones
-- 👥 24 utilisateurs
-- 🏃 6 activités : `dws` (descendre), `ups` (monter), `wlk` (marcher), `jog` (courir), `sit` (assis), `std` (debout)
-- 📏 Capteurs : 12 dimensions (accélération, rotation, gravité sur axes x, y, z)
-- 🔗 [Télécharger sur Kaggle](https://www.kaggle.com/malekzadeh/motionsense-dataset)
+- 📱 Source: Smartphone accelerometer and gyroscope data
+- 👥 24 users
+- 🏃 6 activities: `dws` (downstairs), `ups` (upstairs), `wlk` (walking), `jog` (jogging), `sit` (sitting), `std` (standing)
+- 📏 Sensors: 12 dimensions (acceleration, rotation, gravity on x, y, z axes)
+- 🔗 [Download on Kaggle](https://www.kaggle.com/malekzadeh/motionsense-dataset)
 
-## 🔬 Méthodologie
+## 🔬 Methodology
 
-### Prétraitement des Données
+### Data Preprocessing
 
 ```
-1. Chargement des fichiers CSV par utilisateur/activité
-2. Regroupement des labels (ex: sit_5, sit_13 → sit)
-3. Segmentation en fenêtres glissantes :
-   - Taille de fenêtre : 500 échantillons
-   - Overlap : 80% (optimal trouvé par GridSearch)
-   - ~12,600 fenêtres générées
+1. Load CSV files per user/activity
+2. Label grouping (e.g., sit_5, sit_13 → sit)
+3. Sliding window segmentation:
+   - Window size: 500 samples
+   - Overlap: 80% (optimal found by GridSearch)
+   - ~12,600 windows generated
 ```
 
-### Approche 1 : Random Forest
+### Approach 1: Random Forest
 
-**Extraction de Features (240+ caractéristiques)**
-- Statistiques temporelles : moyenne, std, min, max, médiane, quartiles, variance, skewness, kurtosis
-- Variations : variation totale, moyenne, maximale
-- Domaine fréquentiel : FFT (magnitude, fréquence dominante)
-- Entropie de Shannon
-- Autocorrélation (lag-1, lag-5)
-- Zero-crossings, énergie, RMS
+**Feature Extraction (240+ features)**
+- Temporal statistics: mean, std, min, max, median, quartiles, variance, skewness, kurtosis
+- Variations: total, mean, maximum variation
+- Frequency domain: FFT (magnitude, dominant frequency)
+- Shannon entropy
+- Autocorrelation (lag-1, lag-5)
+- Zero-crossings, energy, RMS
 
-**Optimisation**
-- SelectKBest : k=250 features optimales
-- GridSearchCV : 360 combinaisons d'hyperparamètres testées
-- Validation croisée 3-fold
+**Optimization**
+- SelectKBest: k=250 optimal features
+- GridSearchCV: 360 hyperparameter combinations tested
+- 3-fold cross-validation
 
-### Approche 2 : CNN 1D
+### Approach 2: 1D CNN
 
 **Architecture**
 ```
@@ -98,61 +98,61 @@ Conv1D(256) → BatchNorm → GlobalAvgPool → Dropout(0.5)
 Dense(128) → Dropout(0.5) → Dense(6, softmax)
 ```
 
-**Régularisation**
+**Regularization**
 - L2 regularization (0.001)
 - Batch Normalization
-- Dropout progressif (0.3 → 0.5)
+- Progressive Dropout (0.3 → 0.5)
 - Early Stopping (patience=15)
 - ReduceLROnPlateau
 
-## 🏆 Résultats
+## 🏆 Results
 
-### Performance Comparative
+### Comparative Performance
 
-| Modèle | Précision | Configuration |
-|--------|-----------|---------------|
-| **Random Forest (Split 70/30)** | **94.65%** | 132 features de base |
-| **Random Forest (LOSO)** | **97.16%** | 132 features de base |
-| **Random Forest Optimisé** | **~98%** | 250 features + GridSearch |
-| **CNN 1D** | **98.25%** | Apprentissage end-to-end |
+| Model | Accuracy | Configuration |
+|-------|----------|---------------|
+| **Random Forest (70/30 Split)** | **94.65%** | 132 baseline features |
+| **Random Forest (LOSO)** | **97.16%** | 132 baseline features |
+| **Optimized Random Forest** | **~98%** | 250 features + GridSearch |
+| **1D CNN** | **98.25%** | End-to-end learning |
 
-### Analyse
+### Analysis
 
-✅ **Cohérence** : Split 70/30 < LOSO < CNN (progression logique)  
-✅ **Généralisation** : Validation LOSO confirme la robustesse inter-utilisateurs  
-✅ **Amélioration CNN** : +3.6 points vs RF baseline grâce aux features temporelles automatiques  
-✅ **Pas d'overfitting** : Écart train/validation <2% avec régularisation  
+✅ **Consistency**: 70/30 Split < LOSO < CNN (logical progression)  
+✅ **Generalization**: LOSO validation confirms robust cross-user performance  
+✅ **CNN Improvement**: +3.6 points vs RF baseline through automatic temporal features  
+✅ **No Overfitting**: Train/validation gap <2% with regularization  
 
 ### Confusion Matrix (CNN)
 
-Les confusions les plus fréquentes sont logiques :
-- `wlk` ↔ `jog` (activités similaires)
+Most frequent confusions are logical:
+- `wlk` ↔ `jog` (similar activities)
 - `sit` ↔ `std` (transitions)
-- `ups` ↔ `dws` (mouvements verticaux)
+- `ups` ↔ `dws` (vertical movements)
 
 ## 🚀 Installation
 
-### Prérequis
+### Prerequisites
 
 ```bash
 Python 3.8+
 pip
 ```
 
-### Installation des dépendances
+### Install Dependencies
 
 ```bash
-# Cloner le repository
-git clone https://github.com/votre-username/human-activity-recognition.git
+# Clone the repository
+git clone https://github.com/your-username/human-activity-recognition.git
 cd human-activity-recognition
 
-# Créer un environnement virtuel (recommandé)
+# Create virtual environment (recommended)
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-# ou
+# or
 venv\Scripts\activate  # Windows
 
-# Installer les dépendances
+# Install dependencies
 pip install -r requirements.txt
 ```
 
@@ -168,13 +168,13 @@ tensorflow>=2.8.0
 scipy>=1.7.0
 ```
 
-## 💻 Utilisation
+## 💻 Usage
 
-### 1. Télécharger le Dataset
+### 1. Download the Dataset
 
-Téléchargez le [MotionSense Dataset](https://www.kaggle.com/malekzadeh/motionsense-dataset) et placez-le dans le dossier `data/`.
+Download the [MotionSense Dataset](https://www.kaggle.com/malekzadeh/motionsense-dataset) and place it in the `data/` folder.
 
-Structure attendue :
+Expected structure:
 ```
 data/
 ├── dws/
@@ -188,109 +188,109 @@ data/
 └── std/
 ```
 
-### 2. Exécuter le Notebook
+### 2. Run the Notebook
 
 ```bash
 jupyter notebook motionsense_classification.ipynb
 ```
 
-### 3. Ou utiliser les scripts Python
+### 3. Or Use Python Scripts
 
 ```bash
-# Entraîner le Random Forest
+# Train Random Forest
 python train_random_forest.py --data_path data/ --window_size 500 --overlap 0.8
 
-# Entraîner le CNN
+# Train CNN
 python train_cnn.py --data_path data/ --window_size 500 --epochs 100
 
-# Optimisation complète
+# Complete optimization
 python optimize.py --data_path data/
 ```
 
-## 📁 Structure du Projet
+## 📁 Project Structure
 
 ```
 human-activity-recognition/
 │
-├── data/                          # Dataset (non inclus)
+├── data/                          # Dataset (not included)
 │   ├── dws/
 │   ├── ups/
 │   └── ...
 │
 ├── notebooks/
-│   └── motionsense_classification.ipynb   # Notebook principal
+│   └── motionsense_classification.ipynb   # Main notebook
 │
 ├── src/
-│   ├── data_loading.py           # Chargement des données
-│   ├── preprocessing.py          # Segmentation en fenêtres
-│   ├── feature_extraction.py    # Extraction de features
-│   ├── models.py                 # Architectures RF et CNN
-│   └── optimization.py           # GridSearch et sélection
+│   ├── data_loading.py           # Data loading
+│   ├── preprocessing.py          # Window segmentation
+│   ├── feature_extraction.py    # Feature extraction
+│   ├── models.py                 # RF and CNN architectures
+│   └── optimization.py           # GridSearch and selection
 │
-├── models/                       # Modèles sauvegardés
+├── models/                       # Saved models
 │   ├── rf_model.pkl
 │   ├── cnn_model.h5
 │   └── scaler.pkl
 │
-├── results/                      # Visualisations et rapports
+├── results/                      # Visualizations and reports
 │   ├── confusion_matrices/
 │   ├── training_curves/
 │   └── optimization_results/
 │
-├── requirements.txt              # Dépendances
-├── README.md                     # Ce fichier
-└── LICENSE                       # Licence MIT
+├── requirements.txt              # Dependencies
+├── README.md                     # This file
+└── LICENSE                       # MIT License
 ```
 
 ## 🛠️ Technologies
 
-- **Python 3.8+** : Langage principal
-- **NumPy & Pandas** : Manipulation de données
-- **Scikit-learn** : Random Forest, preprocessing, métriques
-- **TensorFlow/Keras** : CNN 1D
-- **Matplotlib & Seaborn** : Visualisations
-- **SciPy** : FFT, statistiques avancées
+- **Python 3.8+**: Main language
+- **NumPy & Pandas**: Data manipulation
+- **Scikit-learn**: Random Forest, preprocessing, metrics
+- **TensorFlow/Keras**: 1D CNN
+- **Matplotlib & Seaborn**: Visualizations
+- **SciPy**: FFT, advanced statistics
 
-## 📈 Améliorations Futures
+## 📈 Future Improvements
 
-- [ ] Data augmentation (rotation temporelle, ajout de bruit)
-- [ ] Architecture ResNet 1D
+- [ ] Data augmentation (temporal rotation, noise addition)
+- [ ] ResNet 1D architecture
 - [ ] Attention mechanisms / Transformers
 - [ ] Ensemble methods (RF + CNN)
-- [ ] Déploiement avec Flask/FastAPI
-- [ ] Application mobile temps réel
+- [ ] Deployment with Flask/FastAPI
+- [ ] Real-time mobile application
 
-## 📚 Références
+## 📚 References
 
 1. Malekzadeh, M., et al. (2019). "Mobile Sensor Data Anonymization"
 2. Goodfellow, I., et al. (2016). "Deep Learning" - MIT Press
 3. Breiman, L. (2001). "Random Forests" - Machine Learning
 
-## 👨‍💻 Auteur
+## 👨‍💻 Author
 
-**Votre Nom**
-- GitHub: [@votre-username](https://github.com/votre-username)
-- LinkedIn: [Votre Profil](https://linkedin.com/in/votre-profil)
-- Email: votre.email@example.com
+**Your Name**
+- GitHub: [@your-username](https://github.com/your-username)
+- LinkedIn: [Your Profile](https://linkedin.com/in/your-profile)
+- Email: your.email@example.com
 
-## 🙏 Remerciements
+## 🙏 Acknowledgments
 
-- Dataset MotionSense par Mohammad Malekzadeh
-- Professeur superviseur : [Nom du professeur]
-- Communauté Kaggle
+- MotionSense Dataset by Mohammad Malekzadeh
+- Supervising Professor: [Professor Name]
+- Kaggle Community
 
-## 📄 Licence
+## 📄 License
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-⭐ **Si ce projet vous a été utile, n'hésitez pas à lui donner une étoile !** ⭐
+⭐ **If you found this project helpful, please give it a star!** ⭐
 
 ## 📞 Contact
 
-Pour toute question ou suggestion, n'hésitez pas à ouvrir une [issue](https://github.com/votre-username/human-activity-recognition/issues) ou à me contacter directement.
+For questions or suggestions, feel free to open an [issue](https://github.com/your-username/human-activity-recognition/issues) or contact me directly.
 
 ---
 
-*Projet réalisé dans le cadre d'une activité de recherche supervisée - 2024*
+*Supervised research project - 2024*

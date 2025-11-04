@@ -291,4 +291,4 @@ For questions or suggestions, feel free to open an [issue](https://github.com/yo
 
 ---
 
-*Supervised research project - 2024*
+*Supervised research project - 2025*

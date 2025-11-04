@@ -26,7 +26,11 @@
 This project demonstrates the **superiority of deep learning approaches** for human activity classification from temporal inertial signals. We compare two complementary approaches:
 
 1. **Random Forest** with manual statistical feature extraction
-2. **1D CNN** with automatic temporal feature learning
+<img width="1061" height="523" alt="1" src="https://github.com/user-attachments/assets/ab04844b-6c81-4561-9bea-f40b757baae2" />
+
+3. **1D CNN** with automatic temporal feature learning
+<img width="850" height="383" alt="A-sample-1D-CNN-configuration-with-3-CNN-and-2-MLP-layers" src="https://github.com/user-attachments/assets/e3793f63-705d-4137-ae1e-59de2528810a" />
+
 
 The project also includes a **comprehensive optimization study**: overlap impact, feature selection, and hyperparameter tuning.
 
